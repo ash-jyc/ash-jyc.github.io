@@ -25,11 +25,10 @@ latest_posts:
 {% include author-profile.html %}
 
 {% capture about_markdown %}
-I am an incoming CS Ph.D. student at the University of Illinois Urbana Champaign (UIUC), advised by Prof. Luyi Xing. I will be working on AI and systems security.
+I am a first-year CS Ph.D. student at the University of Illinois Urbana Champaign (UIUC), advised by [Prof. Luyi Xing](https://www.xing-luyi.com/) and supported by the [UIUC Grainger SURGE Fellowship](https://grainger.illinois.edu/academics/graduate/funding/surge). My area of focus is in AI and systems security. Always open to collaboration on security-related projects!
 
-Previously, I received my B.S. from NYU Shanghai, majoring in Computer Science and minoring in Cybersecurity and Data Science. I am grateful to have worked with Prof. Hua Shen (NYUSH), Prof. Muhammad Shafique (NYUAD), and Prof. Xia Zhou (Columbia) on various security projects regarding coding LLMs and audio deepfakes.
 
-Always open to collaboration on security-related projects!
+Previously, I received my B.S. from NYU Shanghai, majoring in Computer Science and minoring in Cybersecurity and Data Science. During my time at NYU, I am honored to have worked with Prof. Hua Shen (NYUSH), Prof. Muhammad Shafique (NYUAD), and Prof. Xia Zhou (Columbia) on various security projects regarding coding LLMs and audio deepfakes.
 
 {% endcapture %}
 {{ about_markdown | markdownify }}

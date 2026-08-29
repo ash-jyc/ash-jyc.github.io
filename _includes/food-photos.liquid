@@ -1,0 +1,71 @@
+{% comment %}
+  Food photo figure for blog posts.
+
+  Usage (single photo):
+    {% include food-photos.liquid
+       paths="summer-2026/phe-matcha.jpg"
+       location="Seattle, WA"
+       name="Phê"
+       date="August 9, 2026"
+       beli="9.7"
+       caption="best matcha of the summer, no contest" %}
+
+  Usage (multiple photos, comma-separated -> side-by-side row):
+    {% include food-photos.liquid
+       paths="summer-2026/paju-1.jpg, summer-2026/paju-2.jpg"
+       location="Seattle, WA"
+       name="Paju"
+       date="August 12, 2026"
+       beli="9.8" %}
+
+  Parameters:
+    paths     (required) comma-separated image paths, relative to /assets/img/blog/
+    location  (optional) e.g. "Seattle, WA"
+    name      (optional) restaurant name
+    date      (optional) e.g. "August 12, 2026"
+    beli      (optional) Beli rating, e.g. "9.8"
+    caption   (optional) free-text note, shown on its own line below the meta
+    alt       (optional) alt text; defaults to "<name> in <location>"
+{% endcomment %}
+
+{% assign photo_paths = include.paths | split: "," %}
+{% assign photo_count = photo_paths | size %}
+
+{% comment %}
+  Build the meta line from whichever fields were provided, joining with " · ".
+  Each field appends its own separator only if something precedes it, so any
+  subset of location/name/date/beli produces a clean line.
+{% endcomment %}
+{% assign meta_line = "" %}
+{% if include.location and include.location != "" %}{% assign meta_line = include.location %}{% endif %}
+{% if include.name and include.name != "" %}{% if meta_line != "" %}{% assign meta_line = meta_line | append: " · " %}{% endif %}{% assign meta_line = meta_line | append: include.name %}{% endif %}
+{% if include.date and include.date != "" %}{% if meta_line != "" %}{% assign meta_line = meta_line | append: " · " %}{% endif %}{% assign meta_line = meta_line | append: include.date %}{% endif %}
+{% if include.beli and include.beli != "" %}{% if meta_line != "" %}{% assign meta_line = meta_line | append: " · " %}{% endif %}{% assign meta_line = meta_line | append: include.beli %}{% endif %}
+
+{% if include.alt and include.alt != "" %}
+  {% assign photo_alt = include.alt %}
+{% elsif include.name and include.location %}
+  {% assign photo_alt = include.name | append: " in " | append: include.location %}
+{% elsif include.name %}
+  {% assign photo_alt = include.name %}
+{% else %}
+  {% assign photo_alt = "Food photo" %}
+{% endif %}
+
+<figure class="summer-photos{% if photo_count == 1 %} single{% endif %}">
+  <div class="photo-row">
+    {% for photo_path in photo_paths %}
+      {% assign clean_path = photo_path | strip %}
+      {% assign full_path = "/assets/img/blog/" | append: clean_path %}
+      <img src="{{ full_path | relative_url }}" alt="{{ photo_alt }}" loading="lazy">
+    {% endfor %}
+  </div>
+  {% if meta_line != "" or include.caption %}
+    <figcaption>
+      {% if meta_line != "" %}{{ meta_line }}{% endif %}
+      {% if include.caption and include.caption != "" %}
+        <span class="photo-caption">{{ include.caption }}</span>
+      {% endif %}
+    </figcaption>
+  {% endif %}
+</figure>
