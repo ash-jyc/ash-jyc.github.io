@@ -30,5 +30,7 @@ I am a first-year CS Ph.D. student at the University of Illinois Urbana Champaig
 
 Previously, I received my B.S. from NYU Shanghai, majoring in Computer Science and minoring in Cybersecurity and Data Science. During my time at NYU, I am honored to have worked with Prof. Hua Shen (NYUSH), Prof. Muhammad Shafique (NYUAD), and Prof. Xia Zhou (Columbia) on various security projects regarding coding LLMs and audio deepfakes.
 
+(This is not my cat, but I wish she was.)
+
 {% endcapture %}
 {{ about_markdown | markdownify }}
