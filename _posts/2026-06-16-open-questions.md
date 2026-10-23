@@ -16,3 +16,13 @@ I believe this can be used to evaluate LLM capability on strong argumentation ta
 However, I've run into some similar limitations. Audio quality from debate round recordings are not the best. Policy debaters speak really fast and microphones are typically placed far away from them. This isn't an issue for trained ears but speech-to-text models lack capabilities in transcribing rounds. 
 
 You can check out the project [here](https://github.com/ash-jyc/db84llm.git).
+
+## Omission in AI Agent Security and Privacy
+
+I've noticed that many problems in AI safety, security, and privacy can be boiled down to this idea of **omission**. An agent does something and tells the user that the task is complete, but that response can leave out important information about what happened along the way, especially related to security. Did the agent disclose private data? Did it modify something outside the task? Did it implement insecure code? The user sees the result, while much of the execution remains a black box.
+
+Vibe coding is one example. Someone without security experience might ask an AI to build an application and receive working code with a SQL injection vulnerability. They may never know to look for it.
+
+There seem to be at least two questions here: **what security requirements were never specified, and what security-relevant behavior was left out of the reported outcome?** A user may not know enough to state every requirement, and they might expect some requirements to be inherent. But even when a requirement is explicit, a completion message doesn't establish that the agent respected it. I think these fit under the same general umbrella, even if they need different approaches.
+
+How can we make these omissions visible without expecting users to become security experts? What evidence would let us distinguish between a task being completed and its security requirements being satisfied? And how should an agent communicate what was checked and what remains unknown? I'm interested in this as a broader research direction, with individual projects addressing specific parts of the gap between what an agent reports and what its execution establishes.
